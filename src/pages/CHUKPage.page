@@ -1,0 +1,61 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="nFORCE.TemplateController" extensions="CHUKController" >
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Import the Design System style sheet -->
+  <apex:slds />
+</head>
+
+<apex:composition template="nFORCE__Template_View_1_Column">
+        <apex:define name="column-content">
+            <apex:composition template="nFORCE__Template_View_Container">
+                <apex:define name="content">
+                
+                
+
+
+<!--                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div id="ncCompaniesHouse" > -->
+
+                                    <p class="slds-p-vertical--medium">
+                                        Let's find out the details of this business via 'Companies House'
+                                        <br/>
+                                        Select the correct company below to update the details or click 'Continue' to enter this information manually.
+                                    </p>
+                                    
+                                    <c:CHUKComponent />
+
+                                   <!-- <button class="slds-button slds-button--brand slds-float--right slds-m-top--medium">
+                                    </button>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </apex:define>
+            </apex:composition>
+        </apex:define>
+    </apex:composition>
+
+
+
+
+<body>
+<div class="slds-scope">
+
+
+
+
+
+</div>
+</body>
+</html>
+
+</apex:page>

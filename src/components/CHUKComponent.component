@@ -1,0 +1,100 @@
+<apex:component controller="nFORCE.TemplateController" extensions="CHUKController" layout="none" allowDML="true">
+    <apex:slds />
+    
+    <script>
+    onload = function() {
+        searchCompanyName();
+    }
+    </script>
+    
+    
+    <!-- <apex:outputPanel id="all">     -->
+    <apex:outputPanel id="input">
+        <apex:form >
+            <div class="slds-grid ">
+                <div class="slds-size--11-of-12">
+           <!--         <label class="slds-form-element__label" for="text-input-id-1">Search Companies House</label> -->
+                    <apex:input styleClass="slds-input" required="true" type="text" value="{!searchText}" />
+                    
+                </div>
+                <div class="slds-size--1-of-12">
+                    <apex:commandButton value="Search" styleClass="slds-button slds-button_brand slds-m-left--small" status="status" action="{!SearchCompanyName}" reRender="output" />
+                </div>
+            </div>
+            
+        </apex:form>
+    </apex:outputPanel>
+    <!-- <apex:inputText value="{!searchText}"/> -->
+    <!--    {!temp} -->
+    <br/>
+    
+    <apex:actionStatus id="status" >
+        <apex:facet name="start"> 
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                &nbsp;
+            </div>
+            <div style="position: fixed; left: 40%; top: 15%; margin-top: -15px ; margin-left: -40px ; z-index: 1001;">
+                <img src="{!$Resource.cat}" height="500px" width="500px" />
+            </div>
+            <!-- <apex:image value="{!$Resource.cat}" /></apex:image> -->
+        </apex:facet>
+    </apex:actionstatus>
+    
+    
+    <apex:outputPanel id="output">
+
+
+        <apex:form >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered ">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-cell-wrap" title="Company Title">Company Title</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-cell-wrap" title="Address Snippet">Address</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-cell-wrap" title="Company Number">Company Number</div>
+                        </th>
+                        <!--                  <th class="slds-text-title_caps" scope="col"><div class="slds-truncate" title="List Order">List Order</div></th> -->
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-cell-wrap" title="Button"></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!dataSetOne}" var="d">
+                        <tr>
+                            <td data-label="Company Title">
+                                <div class="slds-cell-wrap" title="{!d.companyTitle}">{!d.companyTitle}</div>
+                            </td>
+                            <td data-label="Address Snippet">
+                                <div class="slds-cell-wrap" title="{!d.addressSnippet}">{!d.addressSnippet}</div>
+                            </td>
+                            <td data-label="Company Number">
+                                <div class="slds-cell-wrap" title="{!d.companyNumber}">{!d.companyNumber}</div>
+                            </td>
+                            <!--   <td data-label="List Order"><div class="slds-truncate" title="{!d.f4}">{!d.f4}</div></td> -->
+                            <td data-label="Button">
+                                <div class="slds-truncate" title="button">
+                                    <apex:commandLink title="{!d.companyTitle}" styleClass="slds-button slds-button_neutral" value="Update Details" action="{!selectCompany}">
+                                        <apex:param name="contIdParam" value="{!d.listOrder}" assignTo="{!rowChosen}" />
+                                    </apex:commandLink>
+                                </div>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+            <p align="left" >
+            <apex:commandButton value="Previous" disabled="{!HasPrevious}" styleClass="slds-button slds-button_neutral" action="{!previousPage}" reRender="output" status="status"/>
+            Page {!currentPageNumber} of {!totalPages}
+            <apex:commandButton value="Next" disabled="{!HasNext}" styleClass="slds-button slds-button_neutral" action="{!nextPage}" reRender="output" status="status"/>
+            </p>
+        </apex:form>
+    </apex:outputPanel>
+    <apex:form >
+        <apex:actionFunction name="searchCompanyName" action="{!searchCompanyName}" reRender="output" status="status" />
+    </apex:form>
+</apex:component>
